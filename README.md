@@ -6,69 +6,41 @@ Lightweight, research-grade Python library for computing **novelty and informati
 
 ---
 
-Overview
+# LLM Informational Novelty
 
-This repository provides a minimal, production-ready method for measuring informational novelty in Large Language Model (LLM) outputs.
+A minimal, production-ready framework for measuring **informational novelty** in LLM outputs. This metric provides a deterministic, model-relative score by analyzing internal signals rather than external embeddings or sampling diversity.
 
-The metric answers one question:
+## Overview
+This metric answers: *How much new information does this text contain from the model’s own perspective?*
 
-How much new information does this text contain from the model’s own perspective?
+Unlike traditional similarity metrics, this approach is:
+* **Internal:** Uses model-specific signals (not vector distance).
+* **Deterministic:** Produces an auditable, repeatable scalar value.
+* **Non-Stylistic:** Focuses on information density over creativity or prose.
 
-Unlike embedding similarity or sampling-based diversity metrics, this approach uses signals internal to the model, producing a deterministic and auditable score.
+---
 
-What “Novelty” Means
+## How It Works
+The novelty score distills three internal signals into a single scalar:
 
-Novelty here does not mean creativity or style.
+* **Prediction Confidence:** Measures the certainty of token predictions.
+* **Parameter Sensitivity:** Tracks how meaningfully the input activates model weights.
+* **Length Normalization:** Prevents score inflation from verbosity or repetition.
 
-A text is considered novel if:
+---
 
-The model makes a confident, non-generic prediction
+## Interpreting the Score
 
-The input meaningfully activates model parameters
+| Score | Impact | Content Characteristics |
+| :--- | :--- | :--- |
+| **High** | Significant | Informative, non-generic, and engages specific model weights. |
+| **Medium** | Moderate | Predictable structures with some unique signal. |
+| **Low** | Minimal | Generic boilerplate, rote memorization, or high redundancy. |
 
-The score is not inflated by length or repetition
+---
 
-This is model-relative informational novelty.
-
-How It Works
-
-The score combines three internal signals:
-
-Prediction confidence
-
-Parameter sensitivity
-
-Length normalization
-
-These are combined into a single scalar value.
-
-How to Interpret the Score
-
-High score
-The input is informative and strongly affects the model.
-
-Medium score
-Mostly predictable with some meaningful signal.
-
-Low score
-Generic, boilerplate, or well-memorized content.
-
-Why This Is Useful
-
-Deterministic novelty scoring
-
-Model-aware evaluation
-
-Auditable and production-safe
-
-Common uses:
-
-Prompt quality evaluation
-
-Dataset curation and deduplication
-
-Memorization detection
-
-Redundancy filtering
-
-Agent self-evaluation
+## Key Use Cases
+* **Prompt Engineering:** Evaluate which prompts elicit the most substantive responses.
+* **Data Curation:** Deduplicate datasets and filter for high-information density.
+* **Memorization Audits:** Detect if a model is "parroting" training data.
+* **Agent Efficiency:** Enable agents to self-filter redundant or circular reasoning.
