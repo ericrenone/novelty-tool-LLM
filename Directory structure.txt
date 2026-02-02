@@ -5,5 +5,3 @@ identity-geometry/
 │   ├── fisher.py
 │   ├── kl.py
 │   └── novelty.py
-├── pyproject.toml
-├── requirements.txt
