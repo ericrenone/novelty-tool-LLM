@@ -1,47 +1,31 @@
-# Identity-Geometry
-
-**Fisher-Rao information geometry + rational inattention novelty scoring for LLM outputs.**
-
-Lightweight, research-grade Python library for computing **novelty and information density** in language models. Provides reproducible **diagonal Fisher trace**, **KL divergence**, and a **novelty functional**.
-
----
-
-# LLM Informational Novelty
-
-A minimal, production-ready framework for measuring **informational novelty** in LLM outputs. 
-Provides a deterministic, model-relative score by analyzing internal signals.
+# Novelty Functional for LLM Outputs
 
 ## Overview
-This metric answers: *How much new information does this text contain from the model’s own perspective?*
 
-Unlike traditional similarity metrics, this approach is:
-* **Internal:** Uses model-specific signals (not vector distance).
-* **Deterministic:** Produces an auditable, repeatable scalar value.
-* **Non-Stylistic:** Focuses on information density over creativity or prose.
+This repository implements a **real-time, research-grade novelty functional** for Large Language Models (LLMs).  
 
----
+The functional combines:
 
-## How It Works
-The novelty score distills three internal signals into a single scalar:
+1. **KL Divergence vs Uniform** – measures the model's prediction confidence.  
+2. **Diagonal Fisher Trace** – measures parameter sensitivity to input.  
+3. **Length Normalization** – penalizes long or repetitive inputs.  
 
-* **Prediction Confidence:** Measures the certainty of token predictions.
-* **Parameter Sensitivity:** Tracks how meaningfully the input activates model weights.
-* **Length Normalization:** Prevents score inflation from verbosity or repetition.
+**Novelty Score**:  
 
----
+\[
+\text{Novelty}(x) = \frac{\text{KL}(p_\theta \| U) \cdot \text{FisherTrace}(x)}{L(x)}
+\]
 
-## Interpreting the Score
-
-| Score | Impact | Content Characteristics |
-| :--- | :--- | :--- |
-| **High** | Significant | Informative, non-generic, and engages specific model weights. |
-| **Medium** | Moderate | Predictable structures with some unique signal. |
-| **Low** | Minimal | Generic boilerplate, rote memorization, or high redundancy. |
+High novelty implies: confident, informative, and parameter-sensitive input.  
+Low novelty implies generic, memorized, or low-information content.
 
 ---
 
-## Key Use Cases
-* **Prompt Engineering:** Evaluate which prompts elicit the most substantive responses.
-* **Data Curation:** Deduplicate datasets and filter for high-information density.
-* **Memorization Audits:** Detect if a model is "parroting" training data.
-* **Agent Efficiency:** Enable agents to self-filter redundant or circular reasoning.
+## Features
+
+- **Single-file implementation** – no external submodules.  
+- **Real-time dynamic simulation** with live visualization.  
+- **Seeded, reproducible experiments** for deterministic results.  
+- **Console + popout visualization** for KL, Fisher, and Novelty.  
+- **Compatible with any **HuggingFace causal LM**.  
+
