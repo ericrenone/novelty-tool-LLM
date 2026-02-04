@@ -1,6 +1,6 @@
 # Novelty Functional for LLM Outputs
 
-## Overview
+## Core
 
 This repository implements a **real-time, research-grade novelty functional** for Large Language Models (LLMs).  
 
@@ -10,11 +10,6 @@ The functional combines:
 2. **Diagonal Fisher Trace** – measures parameter sensitivity to input.  
 3. **Length Normalization** – penalizes long or repetitive inputs.  
 
-**Novelty Score**:  
-
-\[
-\text{Novelty}(x) = \frac{\text{KL}(p_\theta \| U) \cdot \text{FisherTrace}(x)}{L(x)}
-\]
 
 High novelty implies: confident, informative, and parameter-sensitive input.  
 Low novelty implies generic, memorized, or low-information content.
