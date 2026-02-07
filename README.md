@@ -1,23 +1,12 @@
-# novelty tool for Large Language Models (LLMs)
+# Novelty Detection for Federated Learning
+**Lightweight Anomaly Detection at Scale**
 
-## Core
-
-This repository implements a **real-time, research-grade novelty tool** for Large Language Models (LLMs):
-
-1. **KL Divergence vs Uniform** – measures the model's prediction confidence.  
-2. **Diagonal Fisher Trace** – measures parameter sensitivity to input.  
-3. **Length Normalization** – penalizes long or repetitive inputs.  
-
-
-High novelty implies: confident, informative, and parameter-sensitive input.  
-Low novelty implies generic, memorized, or low-information content.
+Detects novel/anomalous text inputs in **federated learning (FL)** with minimal resource usage. Optimized for **1M–100M devices**, reducing communication overhead by **~80%** while preserving model accuracy.
 
 ---
 
-## Features
-
-- **Single-file implementation** – no external submodules.  
-- **Real-time dynamic simulation** with live visualization.  
-- **Seeded, reproducible experiments** for deterministic results.  
-- **Console + popout visualization** for KL, Fisher, and Novelty.  
+## Core 
+- **Why?** Flags critical updates in FL, cutting noise and communication.
+- **How?** Uses **KL Divergence + Fisher Information** to score "novelty" per input.
+- **For Who?** Researchers/developers scaling FL to **massive device networks**.
 
