@@ -1,37 +1,49 @@
 # FPGA Novelty Detection Accelerator
 
-**Target FPGA:** Gowin Tang Nano 9K
-
+**Target FPGA:** Gowin Tang Nano 9K  
 **Logic:** Leaky Integrator Neuron + UART E2E Benchmark Echo
 
 ---
 
 ## Project Overview
-This project implements a **novelty detection accelerator** on the Gowin Tang Nano 9K FPGA, designed with a focus on **extremely low resource usage**—a core principle in my research on federated learning (FL) and decentralized systems. The goal is to **dismantle the "compute wall" paradigm** by demonstrating how lightweight, deterministic hardware can achieve real-time performance with minimal resources.
+
+This project implements a **novelty detection accelerator** on the Gowin Tang Nano 9K FPGA, designed with a focus on **extremely low resource usage**—a core principle in research on federated learning (FL) and decentralized systems. The goal is to **dismantle the "compute wall" paradigm** by demonstrating how lightweight, deterministic hardware can achieve real-time performance with minimal resources.
 
 The accelerator receives streaming input via UART, accumulates signal energy using a **leaky integrator**, compares it to pre-set thresholds in a **weight ROM**, and visualizes novelty events on **onboard LEDs**. It also echoes input back to a host for **end-to-end (E2E) latency benchmarking**, enabling direct comparison with CPU-based implementations.
 
-This design serves as a **hardware-software co-design benchmark**, aligning with my broader research goals of advancing **large-scale device networks** (1M–100M devices) and exploring novel gated mechanisms in FL.
+This design serves as a **hardware-software co-design benchmark**, aligning with broader research goals of advancing **large-scale device networks** (1M–100M devices) and exploring novel gated mechanisms in FL.
+
+---
+
+## 1. Lambda Calculus Formalization
+
+The **state transition** of the neuron can be expressed functionally:
+
+- `energy_acc` — current energy accumulator state.  
+- `rx_data` — input stimulus value.  
+- `>>` — bitwise right-shift operator implementing temporal decay.  
+- Integration step — combines new data into the existing potential.  
+
+The **novelty predicate** determines system output:
+
+- Synaptic weights retrieved from BRAM ROM.  
+- Hardware comparator logic triggers LED visualization.
 
 ---
 
 ## Key Features
-- **Leaky Integrator Neuron**: Smooths input and accumulates energy with minimal computational overhead.
-- **Weight ROM Thresholding**: Triggers LED feedback when energy exceeds a threshold, ensuring deterministic behavior.
-- **UART RX/TX Echo**: Enables real-time benchmarking of FPGA vs CPU, validating hardware efficiency.
-- **LED Visualization**: Provides immediate feedback on novelty events, useful for debugging and demonstration.
-- **Deterministic Behavior**: Achieves low jitter (<0.5 µs) for reproducible results, critical for large-scale deployments.
+
+- **Leaky Integrator Neuron:** Smooths input and accumulates energy with minimal computational overhead.  
+- **Weight ROM Thresholding:** Triggers LED feedback when energy exceeds a threshold, ensuring deterministic behavior.  
+- **UART RX/TX Echo:** Enables real-time benchmarking of FPGA vs CPU, validating hardware efficiency.  
+- **LED Visualization:** Provides immediate feedback on novelty events, useful for debugging and demonstration.  
+- **Deterministic Behavior:** Achieves low jitter (<0.5 µs) for reproducible results, critical for large-scale deployments.  
 
 ---
 
-# FPGA-Based Real-Time Processing: Key Takeaways
+# Hardware vs. Software Performance
 
-## 1. Hardware vs. Software Performance
-- **Zero-Latency Compute:** FPGA achieves ~37.037 ns/clock cycle, effectively zero latency.
-- **Absolute Determinism:** 100% determinism with jitter < 0.5µs; software is OS-dependent and non-deterministic.
-- **I/O-Bound:** UART transport (~86.8µs) is the bottleneck, not computation.
-
-## 2. Neuromorphic Logic ("Silicon Brain")
-- **Leaky Integrator Model:** Implements `energy_acc = energy_acc + (input * weight) - (energy_acc >> 1)` for temporal memory.
-- **Novelty Detection:** Compares accumulated energy to quantized ROM weights to classify patterns as "Novel."
+- **Zero-Latency Compute:** FPGA achieves ~37.037 ns per clock cycle, effectively zero latency.  
+- **Absolute Determinism:** 100% determinism with jitter < 0.5 µs; software is OS-dependent and non-deterministic.  
+- **I/O-Bound:** UART transport (~86.8 µs) is the bottleneck, not computation.  
 
