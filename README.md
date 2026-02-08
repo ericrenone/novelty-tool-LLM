@@ -27,7 +27,7 @@ The system implements a **silicon-native leaky integrator** with a simplified st
 
 ---
 
-## 3. Thermodynamic & Energy Metrics
+## 3. SOTA Thermodynamic & Energy Metrics
 
 The project utilizes a **5x5x5 Burst Mode** (5 Seeds × 5 Parallel Instances × 25 Rounds) to quantify the **"Energy Efficiency Cliff"**:
 
@@ -50,7 +50,16 @@ The project utilizes a **5x5x5 Burst Mode** (5 Seeds × 5 Parallel Instances × 
 
 ---
 
-## 5. File Structure
+## 5. What it DOES NOT Prove (Yet)
+
+To be scientifically rigorous, there are a few things this current version doesn't "prove":
+
+- **It does not prove "Better than CPU" Power Efficiency**: Because the power draw is estimated in software (`psutil`) rather than measured with a physical tool, it is a **"theoretical proof"** only.
+- **It does not prove "Intelligence"**: The Leaky Integrator is a very simple filter. It proves the mechanics of a neuron, but not the learning capability of a brain.
+
+---
+
+## 6. File Structure
 
 | File                        | Description                                                                 |
 |-----------------------------|-----------------------------------------------------------------------------|
@@ -60,7 +69,7 @@ The project utilizes a **5x5x5 Burst Mode** (5 Seeds × 5 Parallel Instances × 
 
 ---
 
-## 6. Scientific Conclusions
+## 7. Scientific Conclusions
 
 - **Hardware Superiority**: The FPGA provides a **deterministic thermal envelope**, whereas CPU draw is subject to "Silicon Jitter" and OS-driven fluctuations.
 - **Neuromorphic Success**: The leaky integrator accurately models energy decay, proving that **16-bit fixed-point is sufficient** for bio-inspired dynamics.
@@ -68,7 +77,7 @@ The project utilizes a **5x5x5 Burst Mode** (5 Seeds × 5 Parallel Instances × 
 
 ---
 
-## 7. Next Steps
+## 8. Next Steps
 
 - **Adaptive Thresholding**: Implementing **STDP (Spike-Timing-Dependent Plasticity)** for dynamic learning.
 - **Functional HDL Port**: Transitioning the design to **Clash or Bluespec** for deeper Lambda Calculus integration.
@@ -76,13 +85,13 @@ The project utilizes a **5x5x5 Burst Mode** (5 Seeds × 5 Parallel Instances × 
 
 ---
 
-## 8. Quick Start
+## 9. Quick Start
 
 ### Hardware Setup
 1. Flash `Verilog_Power_Metrics.v` to your **Gowin Tang Nano 9K**.
 2. Connect via USB (ensure your port is set to `COM6` or update the Python script).
-3. Run Python: Power Metrics Test.py
 
-<img width="1360" height="1556" alt="test" src="https://github.com/user-attachments/assets/6590f7df-8d7c-4aab-a058-5f73bbcbbd23" />
-
-
+### Software Execution
+```bash
+pip install pyserial psutil matplotlib numpy
+python Power_Metrics_Test.py
