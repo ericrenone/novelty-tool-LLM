@@ -70,4 +70,4 @@ A **minimalist, hardware-accelerated leaky integrator neuron** implemented on th
 - **Scalability**: Extend for federated learning (FL).
 
 ---
-**Note**: This project demonstrates **deterministic, low-power anomaly detection** on **cheap FPGAs**, paving the way for **edge AI** and **large-scale device networks**.
+This project demonstrates **deterministic, low-power anomaly detection** on **cheap FPGAs**, paving the way for **edge AI** and **large-scale device networks**.
