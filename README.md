@@ -16,19 +16,22 @@
 
 ---
 ## System Definition
-
 \[
 \mathcal{D} = (\mathcal{S}, \mathcal{X}, f, \Delta t)
 \]
-
-- **State Space (\(\mathcal{S}\))**: 16-bit energy accumulator, \(\epsilon \in \{0, \dots, 2^{16}-1\}\)  
-- **Input Space (\(\mathcal{X}\))**: 8-bit UART stimulus, \(x \in \{0, \dots, 2^8-1\}\)  
-- **Transition Function (\(f\))**: LIF primitive  
+- **State Space (\(\mathcal{S}\))**: 16-bit energy accumulator, \(\epsilon \in \{0, \dots, 2^{16}-1\}\)
+- **Input Space (\(\mathcal{X}\))**: 8-bit UART stimulus, \(x \in \{0, \dots, 2^8-1\}\)
+- **Transition Function (\(f\))**: LIF primitive
 \[
 f(\epsilon_n, x_n) = (\epsilon_n >> 1) + x_n
-\]  
+\]
 - **Temporal Resolution (\(\Delta t\))**: deterministic execution with jitter \(< 0.5\mu s\)
-
+---
+## Architecture
+- **Non-von Neumann design:** compute and memory collocated (\(\mathcal{I} \equiv \mathcal{M} \equiv \epsilon\))
+- **Energy efficiency:** \(\rho = 3.24 \text{ nJ/bit}\), ~2,265× better than x86_64 CPU baseline
+- **Formal Logic:** FSM with \(|Q|=2^{16}\), Lambda Calculus verified, 1D Cellular Automaton behavior
+---
 ---
 
 ## Architecture
